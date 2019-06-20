@@ -11,6 +11,7 @@ const initialState = {
 };
 
 export const friendsReducer = (state = initialState, action) => {
+  console.log('action.payload = ', action.payload);
   switch (action.type) {
     case FETCH_FRIENDS_START:
       return {

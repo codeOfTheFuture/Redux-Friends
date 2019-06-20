@@ -1,24 +1,25 @@
 import React, { Component } from 'react';
 import { getFriends } from '../actions';
 import { connect } from 'react-redux';
+import FriendsList from '../components/FriendsList';
 
 class FriendsListView extends Component {
   componentWillMount() {
-    const result = this.props.getFriends();
-    console.log('componentWillMount: ', result);
+    this.props.getFriends();
   }
 
   render() {
+    console.log('this.props.friends: ', this.props.friends);
     return (
       <div>
-        <h1>Friends List</h1>
+        <FriendsList friendsList={this.props.friends} />
       </div>
     );
   }
 }
 
 const mapStateToProps = state => {
-  console.log('mstp: ', state);
+  console.log('this is the state: ', state.friends);
   return {
     friends: state.friends.friends,
     isLoading: state.friends.isLoading
