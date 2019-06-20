@@ -1,21 +1,25 @@
 import axios from 'axios';
 
+import { axiosWithAuth } from '../utilities/axiosWithAuth';
+
 export const LOGIN_START = 'LOGIN_START';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_ERROR = 'LOGIN_FAILURE';
 
-// export const login = () => dispatch => {
-//   dispatch({ type: LOGIN_START });
-//   axios
-//     .post('http://localhost:5000/api/login', body)
-//     .then(res => {
-//       console.log('login res...', res);
-//       dispatch({ type: LOGIN_SUCCESS, payload: res.body });
-//     })
-//     .catch(err => {
-//       dispatch({ type: LOGIN_ERROR, payload: err });
-//     });
-// };
+export const login = credentials => dispatch => {
+  dispatch({ type: LOGIN_START });
+  return axiosWithAuth()
+    .post('/login', credentials)
+    .then(res => {
+      console.log('login res...', res);
+      localStorage.setItem('token', res.data.payload);
+      dispatch({ type: LOGIN_SUCCESS });
+      return true;
+    })
+    .catch(err => {
+      dispatch({ type: LOGIN_ERROR, payload: err });
+    });
+};
 
 export const FETCH_FRIENDS_START = 'FETCH_FRIENDS_START';
 export const FETCH_FRIENDS_SUCCESS = 'FETCH_FRIENDS_SUCCESS';
