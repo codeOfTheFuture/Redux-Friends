@@ -4,7 +4,10 @@ import {
   FETCH_FRIENDS_ERROR,
   ADD_FRIEND_START,
   ADD_FRIEND_SUCCESS,
-  ADD_FRIEND_ERROR
+  ADD_FRIEND_ERROR,
+  DELETE_FRIEND_START,
+  DELETE_FRIEND_SUCCESS,
+  DELETE_FRIEND_ERROR
 } from '../actions';
 
 const initialState = {
@@ -50,6 +53,26 @@ export const friendsReducer = (state = initialState, action) => {
         error: ''
       };
     case ADD_FRIEND_ERROR:
+      return {
+        ...state,
+        friends: state.friends,
+        isLoading: false,
+        error: action.payload
+      };
+    case DELETE_FRIEND_START:
+      return {
+        ...state,
+        isLoading: true,
+        error: ''
+      };
+    case DELETE_FRIEND_SUCCESS:
+      return {
+        ...state,
+        friends: action.payload,
+        isLoading: false,
+        error: ''
+      };
+    case DELETE_FRIEND_ERROR:
       return {
         ...state,
         friends: state.friends,

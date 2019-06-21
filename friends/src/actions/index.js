@@ -58,6 +58,24 @@ export const addFriend = friend => dispatch => {
     });
 };
 
+export const DELETE_FRIEND_START = 'DELETE_FRIEND_START';
+export const DELETE_FRIEND_SUCCESS = 'DELETE_FRIEND_SUCCESS';
+export const DELETE_FRIEND_ERROR = 'DELETE_FRIEND_ERROR';
+
+export const deleteFriend = id => dispatch => {
+  dispatch({ type: DELETE_FRIEND_START });
+  axiosWithAuth()
+    .delete(`/friends/${id}`)
+    .then(res => {
+      console.log('Friend Deleted...', res);
+      dispatch({ type: DELETE_FRIEND_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      console.log('Friend Deleted..', err);
+      dispatch({ type: DELETE_FRIEND_ERROR, payload: err });
+    });
+};
+
 export const MODAL_SHOW = 'MODAL_SHOW';
 export const MODAL_CLOSE = 'MODAL_CLOSE';
 

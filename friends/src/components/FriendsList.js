@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import FriendCard from './FriendCard';
+import Friend from './Friend';
 import { handleModalShow } from '../actions';
 
 import { Button } from 'react-bootstrap';
@@ -30,7 +30,7 @@ const FriendsList = props => {
       </div>
       <div className="d-flex flex-lg-wrap mt-5 align-items-center justify-content-center">
         {props.friendsList.map(friend => {
-          return <FriendCard friend={friend} />;
+          return <Friend friend={friend} />;
         })}
       </div>
     </div>
