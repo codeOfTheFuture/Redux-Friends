@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { login } from '../actions';
 
+import { Form, FormGroup, FormControl, Button } from 'react-bootstrap';
+
 class LoginView extends Component {
   state = {
     credentials: {
@@ -30,33 +32,36 @@ class LoginView extends Component {
 
   render() {
     return (
-      <div>
-        <form onSubmit={this.login}>
-          <div>
-            <label htmlFor="username">Username</label>
-            <input
-              type="text"
-              id="username"
-              placeholder="Username"
-              name="username"
-              value={this.state.credentials.username}
-              onChange={this.onInputChange}
-            />
-          </div>
-          <div>
-            <label htmlFor="password">Password</label>
-            <input
-              type="text"
-              id="password"
-              placeholder="Password"
-              name="password"
-              value={this.state.credentials.password}
-              onChange={this.onInputChange}
-            />
-          </div>
-          <button type="submit">Login</button>
-        </form>
-      </div>
+      <Form
+        onSubmit={this.login}
+        className="my-5 p-5 border border-secondary rounded bg-light w-100"
+      >
+        <FormGroup>
+          <Form.Label htmlFor="username">Username</Form.Label>
+          <FormControl
+            type="text"
+            id="username"
+            placeholder="Username"
+            name="username"
+            value={this.state.credentials.username}
+            onChange={this.onInputChange}
+          />
+        </FormGroup>
+        <FormGroup>
+          <Form.Label htmlFor="password">Password</Form.Label>
+          <FormControl
+            type="text"
+            id="password"
+            placeholder="Password"
+            name="password"
+            value={this.state.credentials.password}
+            onChange={this.onInputChange}
+          />
+        </FormGroup>
+        <Button type="submit" className="btn-primary">
+          Login
+        </Button>
+      </Form>
     );
   }
 }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { getFriends } from '../actions';
 import { connect } from 'react-redux';
 import FriendsList from '../components/FriendsList';
+import AddFriendForm from '../components/AddFriendForm';
 
 class FriendsListView extends Component {
   componentWillMount() {
@@ -9,17 +10,18 @@ class FriendsListView extends Component {
   }
 
   render() {
-    console.log('this.props.friends: ', this.props.friends);
     return (
-      <div>
-        <FriendsList friendsList={this.props.friends} />
-      </div>
+      <React.Fragment>
+        <AddFriendForm />
+        <div className="d-flex flex-row my-4">
+          <FriendsList friendsList={this.props.friends} />
+        </div>
+      </React.Fragment>
     );
   }
 }
 
 const mapStateToProps = state => {
-  console.log('this is the state: ', state.friends);
   return {
     friends: state.friends.friends,
     isLoading: state.friends.isLoading
